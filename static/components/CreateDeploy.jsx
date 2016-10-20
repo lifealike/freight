@@ -120,7 +120,7 @@ var CreateDeploy = React.createClass({
               </select>
             </div>
             <div className="form-group">
-              <label>Environment</label>
+              <label>Environment test</label>
               <input type="text" className="form-control"
                      onChange={this.onChangeEnvironment}
                      placeholder="e.g. staging, full-stack" value={this.state.env} />
