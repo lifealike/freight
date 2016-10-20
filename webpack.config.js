@@ -3,7 +3,9 @@
 var path = require("path"),
     webpack = require("webpack");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ManifestRevisionPlugin = require('manifest-revision-webpack-plugin');
 
+var rootAssetPath = __dirname + "/static";
 module.exports = {
   context: __dirname + "/static",
   entry: {
@@ -52,6 +54,10 @@ module.exports = {
     new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery',
+    }),
+    new ManifestRevisionPlugin(path.join('build', 'manifest.json'), {
+        rootAssetPath: rootAssetPath,
+        ignorePaths: ['/stylesheets', '/javascript']
     })
   ],
   resolve: {

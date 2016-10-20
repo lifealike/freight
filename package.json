@@ -37,6 +37,7 @@
     "json-loader": "^0.5.2",
     "less": "^1.7.5",
     "less-loader": "^0.7.8",
+    "manifest-revision-webpack-plugin": "^0.3.0",
     "moment": "^2.9.0",
     "react": "^0.12.2",
     "react-router": "^0.12.4",
