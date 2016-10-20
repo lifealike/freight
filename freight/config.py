@@ -15,7 +15,7 @@ from werkzeug.contrib.fixers import ProxyFix
 from freight.queue import Queue
 from freight.api.controller import ApiController
 from freight.constants import PROJECT_ROOT
-
+from flask_webpack import Webpack
 
 api = ApiController(prefix='/api/0')
 db = SQLAlchemy(session_options={})
@@ -23,7 +23,7 @@ heroku = Heroku()
 redis = Redis()
 sentry = Sentry(logging=True, level=logging.WARN)
 queue = Queue()
-
+webpack = Webpack()
 
 def configure_logging(app):
     logging.getLogger().setLevel(getattr(logging, app.config['LOG_LEVEL']))
@@ -34,7 +34,7 @@ def create_app(_read_config=True, **config):
         __name__,
         static_folder=None,
         template_folder=os.path.join(PROJECT_ROOT, 'templates'))
-
+    webpack.init_app(app)
     # Utilized for sessions and other secrets
     # NOTE: This key is insecure and you should override it on the server
     app.config['SECRET_KEY'] = 't\xad\xe7\xff%\xd2.\xfe\x03\x02=\xec\xaf\\2+\xb8=\xf7\x8a\x9aLD\xb1'
