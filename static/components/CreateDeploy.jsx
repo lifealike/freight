@@ -121,7 +121,7 @@ var CreateDeploy = React.createClass({
               </select>
             </div>
             <div className="form-group">
-              <label>Environment-Test</label>
+              <label>Environment-Luke</label>
               <select className="form-control"
                       value={this.state.env}
                       onChange={this.onChangeEnvironment}>
