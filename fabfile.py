@@ -17,6 +17,7 @@ def release():
     sudo('chown -R freight: /srv/freight')
     with cd('/srv/freight/releases/current/freight'):
         sudo('npm install --unsafe-perm')
+        sudo('webpack --progress --colors')
 
 
 @task
