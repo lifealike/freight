@@ -41,12 +41,14 @@ var CreateDeploy = React.createClass({
   onChangeEnvironment(e) {
     this.setState({
       env: e.target.value,
+      ref: this.state.ref,
     });
   },
 
   onChangeRef(e) {
     this.setState({
       ref: e.target.value,
+      env: this.state.env,
     });
   },
 
