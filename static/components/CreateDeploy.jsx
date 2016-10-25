@@ -14,14 +14,12 @@ var CreateDeploy = React.createClass({
   getInitialState() {
     let appList = this.props.appList;
     let defaultApp = appList.length !== 0 ? appList[0] : null;
-    let defaultEnv = defaultApp ? Object.keys(defaultApp.environments)[0] : null;
-    let envMap = defaultApp ? defaultApp.environments : {};
-    let defaultRef = defaultEnv ? envMap[defaultEnv].defaultRef : 'master';
+    let defaultEnv = null;
+    let defaultRef = 'master';
 
     return {
       app: defaultApp ? defaultApp.name : null,
-      env: defaultEnv ? defaultEnv.name : null,
-      envMap: envMap,
+      env: defaultEnv,
       ref: defaultRef,
       submitInProgress: false,
       submitError: null,
@@ -33,22 +31,16 @@ var CreateDeploy = React.createClass({
     let envMap = val ? this.props.appList.filter((app) => {
       return app.name === val;
     })[0].environments || {} : {};
-    let envList = Object.keys(envMap);
-    let env = envList.length ? envList[0] : null;
     this.setState({
       app: val,
-      envMap: envMap,
-      env: env,
-      ref: env ? env.defaultRef : 'master',
+      env: null,
+      ref: 'master',
     });
   },
 
   onChangeEnvironment(e) {
-    let val = jQuery(e.target).val();
-    let config = val ? this.state.envMap[val] || {} : {};
     this.setState({
-      env: val,
-      ref: config.defaultRef || 'master',
+      env: e.target.value,
     });
   },
 
@@ -121,14 +113,12 @@ var CreateDeploy = React.createClass({
               </select>
             </div>
             <div className="form-group">
-              <label>Environment-Luke</label>
-              <select className="form-control"
-                      value={this.state.env}
-                      onChange={this.onChangeEnvironment}>
-                {Object.keys(this.state.envMap).map((env) => {
-                  return <option key={env}>{env}</option>
-                })}
-              </select>
+              <label>Environment</label>
+              <input className="form-control"
+                value={this.state.env}
+                onChange={this.onChangeEnvironment}
+
+              />
             </div>
             <div className="form-group">
               <label>Ref</label>
